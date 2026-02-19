@@ -26,6 +26,7 @@ modules:
     requires:
       - name: B2B-auth
       - name: B2B-db
+      - name: B2B-destination
 
   - name: B2B-db-deployer
     type: hdb
@@ -54,3 +55,8 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: B2B-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
