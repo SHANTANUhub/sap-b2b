@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run B2B-1",
+      "request": "launch",
+      "type": "node",
+      "cwd": "${workspaceFolder}/B2B",
+      "runtimeExecutable": "cds",
+      "args": [
+        "serve",
+        "--in-memory?"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "envFile": "${workspaceFolder}/B2B/.env1",
+      "env": {
+        "NODE_ENV": "development",
+        "run.config": "{\"handlerId\":\"cap_run_config_handler_id\",\"runnableId\":\"{\\\"projectPath\\\":\\\"/home/new1/B2B\\\",\\\"profileName\\\":\\\"development\\\"}\"}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+POST http://localhost:4004/odata/v4/test/getData
+Content-Type: application/json
+
+{
+
+}
