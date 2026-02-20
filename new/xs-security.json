@@ -1,5 +1,74 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": []
+  "xsappname": "new-app",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Read",
+      "description": "Permission to read data"
+    },
+    {
+      "name": "$XSAPPNAME.Write",
+      "description": "Permission to create and update data"
+    },
+    {
+      "name": "$XSAPPNAME.Delete",
+      "description": "Permission to delete data"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Administrator permission"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Department",
+      "description": "User's department",
+      "valueType": "string"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Read-only access to the application",
+      "scope-references": [
+        "$XSAPPNAME.Read"
+      ],
+      "attribute-references": [
+        "Department"
+      ]
+    },
+    {
+      "name": "Editor",
+      "description": "Can create and modify data",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write"
+      ],
+      "attribute-references": [
+        "Department"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Full data management capabilities",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write",
+        "$XSAPPNAME.Delete"
+      ],
+      "attribute-references": [
+        "Department"
+      ]
+    },
+    {
+      "name": "Administrator",
+      "description": "Full administrative access",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write",
+        "$XSAPPNAME.Delete",
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ]
 }
