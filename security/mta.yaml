@@ -24,7 +24,7 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: security-auth
+      - name: security-xsuaa
       - name: security-db
 
   - name: security-db-deployer
@@ -34,23 +34,7 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: security-db
-  - name: security-srv
-    requires:
-      - name: security-xsuaa
 resources:
-  - name: security-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: security-${org}-${space}
-        tenant-mode: dedicated
-        oauth2-configuration:
-          credential-types:
-            - "binding-secret"
-            - "x509"
   - name: security-db
     type: com.sap.xs.hdi-container
     parameters:
