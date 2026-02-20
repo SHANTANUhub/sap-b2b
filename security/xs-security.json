@@ -1,7 +1,6 @@
 {
   "xsappname": "security-app",
   "tenant-mode": "dedicated",
-  
   "scopes": [
     {
       "name": "$XSAPPNAME.Read",
@@ -18,9 +17,24 @@
     {
       "name": "$XSAPPNAME.Admin",
       "description": "Administrator permission"
+    },
+    {
+      "name": "$XSAPPNAME.Manager",
+      "description": "Manager"
+    },
+    {
+      "name": "$XSAPPNAME.Administrator",
+      "description": "Administrator"
+    },
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "Viewer"
+    },
+    {
+      "name": "$XSAPPNAME.Editor",
+      "description": "Editor"
     }
   ],
-  
   "attributes": [
     {
       "name": "Department",
@@ -33,7 +47,6 @@
       "valueType": "string"
     }
   ],
-  
   "role-templates": [
     {
       "name": "Viewer",
@@ -81,9 +94,7 @@
       ]
     }
   ],
-  
   "authorities-inheritance": false,
-  
   "oauth2-configuration": {
     "redirect-uris": [
       "https://*.applicationstudio.cloud.sap/**"

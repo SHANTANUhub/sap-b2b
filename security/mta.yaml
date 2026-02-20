@@ -46,3 +46,31 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
+      config:
+        xsappname: security-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+        role-collections:
+          - name: 'Manager (security ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Manager'
+          - name: 'Administrator (security ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Administrator'
+          - name: 'Viewer (security ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Viewer'
+          - name: 'Editor (security ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Editor'
+          - name: 'userattributes (security ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.userattributes'
