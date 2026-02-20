@@ -34,7 +34,9 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: security-db
-
+  - name: security-srv
+    requires:
+      - name: security-xsuaa
 resources:
   - name: security-auth
     type: org.cloudfoundry.managed-service
@@ -54,3 +56,9 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: security-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json

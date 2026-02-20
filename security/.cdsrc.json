@@ -1,0 +1,50 @@
+{
+  "comment": "Test users with different roles and attributes for local development",
+  "auth": {
+    "passport": {
+      "strategy": "mock",
+      "users": {
+        "alice": {
+          "comment": "Viewer role - Can only READ orders in Sales department",
+          "password": "password",
+          "roles": ["Viewer"],
+          "attr": {
+            "Department": ["Sales"]
+          }
+        },
+        "bob": {
+          "comment": "Editor role - Can READ and WRITE in Marketing department",
+          "password": "password",
+          "roles": ["Editor"],
+          "attr": {
+            "Department": ["Marketing"],
+            "CostCenter": ["CC-200"]
+          }
+        },
+        "charlie": {
+          "comment": "Manager role - Can READ, WRITE, DELETE in IT department",
+          "password": "password",
+          "roles": ["Manager"],
+          "attr": {
+            "Department": ["IT"],
+            "CostCenter": ["CC-300"]
+          }
+        },
+        "david": {
+          "comment": "Administrator role - Full access to everything",
+          "password": "password",
+          "roles": ["Administrator"]
+        },
+        "eve": {
+          "comment": "Multi-department Manager - Access to Sales and Marketing",
+          "password": "password",
+          "roles": ["Manager"],
+          "attr": {
+            "Department": ["Sales", "Marketing"],
+            "CostCenter": ["CC-100", "CC-200"]
+          }
+        }
+      }
+    }
+  }
+}

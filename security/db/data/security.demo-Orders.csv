@@ -1,0 +1,6 @@
+ID;orderNumber;customer;amount;department;costCenter;status
+101;ORD-001;ACME Corp;1500.00;Sales;CC-100;Open
+102;ORD-002;TechStart Inc;2500.50;Marketing;CC-200;Processing
+103;ORD-003;Global Traders;3200.00;Sales;CC-100;Completed
+104;ORD-004;Innovation Ltd;1800.75;IT;CC-300;Open
+105;ORD-005;Enterprise Co;4500.00;Marketing;CC-200;Open

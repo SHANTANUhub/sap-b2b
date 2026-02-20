@@ -1,6 +1,95 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": [],
-  "authorities-inheritance": false
+  "xsappname": "security-app",
+  "tenant-mode": "dedicated",
+  
+  "scopes": [
+    {
+      "$comment": "STEP 1: Define fine-grained permissions (scopes)",
+      "name": "$XSAPPNAME.Read",
+      "description": "Permission to read data"
+    },
+    {
+      "name": "$XSAPPNAME.Write",
+      "description": "Permission to create and update data"
+    },
+    {
+      "name": "$XSAPPNAME.Delete",
+      "description": "Permission to delete data"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Administrator permission"
+    }
+  ],
+  
+  "attributes": [
+    {
+      "$comment": "STEP 2: Define attributes for fine-grained access control",
+      "name": "Department",
+      "description": "User's department",
+      "valueType": "string"
+    },
+    {
+      "name": "CostCenter",
+      "description": "User's cost center for expense tracking",
+      "valueType": "string"
+    }
+  ],
+  
+  "role-templates": [
+    {
+      "$comment": "STEP 3: Create role templates by bundling scopes",
+      "name": "Viewer",
+      "description": "Read-only access to the application",
+      "scope-references": [
+        "$XSAPPNAME.Read"
+      ],
+      "attribute-references": [
+        "Department"
+      ]
+    },
+    {
+      "name": "Editor",
+      "description": "Can create and modify data",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write"
+      ],
+      "attribute-references": [
+        "Department",
+        "CostCenter"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Full data management capabilities",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write",
+        "$XSAPPNAME.Delete"
+      ],
+      "attribute-references": [
+        "Department",
+        "CostCenter"
+      ]
+    },
+    {
+      "name": "Administrator",
+      "description": "Full administrative access",
+      "scope-references": [
+        "$XSAPPNAME.Read",
+        "$XSAPPNAME.Write",
+        "$XSAPPNAME.Delete",
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ],
+  
+  "authorities-inheritance": false,
+  
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.applicationstudio.cloud.sap/**"
+    ]
+  }
 }
