@@ -2,5 +2,70 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
+        <content>
+            <Table id="ordersTable" 
+                   items="{/Orders}"
+                   growing="true"
+                   growingThreshold="20"
+                   mode="SingleSelectMaster">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Orders" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button text="Create" type="Emphasized" press=".onCreateOrder"/>
+                        <Button text="Refresh" icon="sap-icon://refresh" press=".onRefresh"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="12em">
+                        <Text text="Order Number"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Customer"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="Amount"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Department"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Cost Center"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Status"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Created By"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Created At"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Modified By"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <Text text="Modified At"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onOrderPress">
+                        <cells>
+                            <ObjectIdentifier title="{orderNumber}"/>
+                            <Text text="{customer}"/>
+                            <ObjectNumber number="{amount}" unit="USD"/>
+                            <Text text="{department}"/>
+                            <Text text="{costCenter}"/>
+                            <ObjectStatus text="{status}" 
+                                         state="{= ${status} === 'Open' ? 'Warning' : ${status} === 'Closed' ? 'Success' : 'None' }"/>
+                            <Text text="{createdBy}"/>
+                            <Text text="{path: 'createdAt', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd/MM/yyyy HH:mm'}}"/>
+                            <Text text="{modifiedBy}"/>
+                            <Text text="{path: 'modifiedAt', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd/MM/yyyy HH:mm'}}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
     </Page>
 </mvc:View>
