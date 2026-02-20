@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="SecurityService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Orders" EntityType="SecurityService.Orders"/>
+                <EntitySet Name="AppConfig" EntityType="SecurityService.AppConfig"/>
+                <ActionImport Name="approveOrder" Action="SecurityService.approveOrder"/>
+                <ActionImport Name="resetAllOrders" Action="SecurityService.resetAllOrders"/>
+                <FunctionImport Name="getMyOrders" Function="SecurityService.getMyOrders" EntitySet="Orders"/>
+                <FunctionImport Name="getDepartmentStats" Function="SecurityService.getDepartmentStats"/>
+            </EntityContainer>
+            <EntityType Name="Orders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="orderNumber" Type="Edm.String" MaxLength="10"/>
+                <Property Name="customer" Type="Edm.String" MaxLength="100"/>
+                <Property Name="amount" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="department" Type="Edm.String" MaxLength="50"/>
+                <Property Name="costCenter" Type="Edm.String" MaxLength="20"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20" DefaultValue="Open"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="AppConfig">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="configKey" Type="Edm.String" MaxLength="50"/>
+                <Property Name="value" Type="Edm.String" MaxLength="500"/>
+            </EntityType>
+            <ComplexType Name="return_SecurityService_getDepartmentStats">
+                <Property Name="totalOrders" Type="Edm.Int32"/>
+                <Property Name="totalAmount" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="openOrders" Type="Edm.Int32"/>
+            </ComplexType>
+            <Action Name="approveOrder" IsBound="false">
+                <Parameter Name="orderID" Type="Edm.Guid"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Action Name="resetAllOrders" IsBound="false">
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Function Name="getMyOrders" IsBound="false" IsComposable="false">
+                <ReturnType Type="Collection(SecurityService.Orders)"/>
+            </Function>
+            <Function Name="getDepartmentStats" IsBound="false" IsComposable="false">
+                <Parameter Name="department" Type="Edm.String"/>
+                <ReturnType Type="SecurityService.return_SecurityService_getDepartmentStats"/>
+            </Function>
+            <Annotations Target="SecurityService.Orders/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.Orders/createdAt">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.Orders/createdBy">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.Orders/modifiedAt">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.Orders/modifiedBy">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.AppConfig/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SecurityService.getDepartmentStats(Edm.String)/department">
+                <Annotation Term="Core.OptionalParameter">
+                    <Record Type="Core.OptionalParameterType"/>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
