@@ -1,0 +1,115 @@
+<mvc:View
+    controllerName="ui5multiplebackend1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Products">
+
+        <Table
+            id="productsTable"
+            items="{/Products}">
+
+            <columns>
+
+                <Column>
+                    <Text text="ID"/>
+                </Column>
+
+                <Column>
+                    <Text text="Name"/>
+                </Column>
+
+                <Column>
+                    <Text text="Price"/>
+                </Column>
+
+                <Column>
+                    <Text text="Quantity"/>
+                </Column>
+
+            </columns>
+
+            <items>
+                <ColumnListItem>
+
+                    <cells>
+
+                        <Text text="{ID}"/>
+
+                        <Text text="{name}"/>
+
+                        <Text text="{price}"/>
+
+                        <Text text="{quantity}"/>
+
+                    </cells>
+
+                </ColumnListItem>
+            </items>
+
+        </Table>
+ <Table
+                id="customersTable"
+                items="{
+                    path: 'model>/Customers'
+                }"
+                growing="true"
+                growingThreshold="10"
+                inset="false">
+
+                <!-- Header Toolbar -->
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Customers List" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button
+                            text="Refresh"
+                            icon="sap-icon://refresh"
+                            press=".onRefresh"/>
+                    </Toolbar>
+                </headerToolbar>
+
+                <!-- Columns -->
+                <columns>
+
+                    <Column>
+                        <Text text="Customer ID"/>
+                    </Column>
+
+                    <Column>
+                        <Text text="Name"/>
+                    </Column>
+
+                    <Column>
+                        <Text text="Email"/>
+                    </Column>
+
+                    <Column>
+                        <Text text="City"/>
+                    </Column>
+
+                </columns>
+
+                <!-- Rows -->
+                <items>
+                    <ColumnListItem type="Navigation" press=".onItemPress">
+
+                        <cells>
+
+                            <Text text="{model>ID}"/>
+
+                            <Text text="{model>name}"/>
+
+                            <Text text="{model>email}"/>
+
+                            <Text text="{model>city}"/>
+
+                        </cells>
+
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+    </Page>
+
+</mvc:View>
