@@ -4,7 +4,6 @@
   
   "scopes": [
     {
-      "$comment": "STEP 1: Define fine-grained permissions (scopes)",
       "name": "$XSAPPNAME.Read",
       "description": "Permission to read data"
     },
@@ -24,7 +23,6 @@
   
   "attributes": [
     {
-      "$comment": "STEP 2: Define attributes for fine-grained access control",
       "name": "Department",
       "description": "User's department",
       "valueType": "string"
@@ -38,7 +36,6 @@
   
   "role-templates": [
     {
-      "$comment": "STEP 3: Create role templates by bundling scopes",
       "name": "Viewer",
       "description": "Read-only access to the application",
       "scope-references": [
