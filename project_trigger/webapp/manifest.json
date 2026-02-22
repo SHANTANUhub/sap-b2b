@@ -15,6 +15,15 @@
       "version": "1.20.3",
       "toolsId": "446f64a1-cad7-49cc-b287-b1577d6fe315"
     },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/catalog/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    },
     "crossNavigation": {
       "inbounds": {
         "trigger-trigger_workflow": {
@@ -63,6 +72,16 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "projecttrigger.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
         }
       }
     },
