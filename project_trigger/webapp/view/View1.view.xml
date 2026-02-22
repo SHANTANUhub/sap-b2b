@@ -56,31 +56,27 @@
                                 <f:content>
                                     <Label id="lblOrderNumber" text="Order Number" required="true" />
                                     <Input id="orderNumberInput" placeholder="e.g. ORD-2024-001" 
-                                        value="{localModel>/orderNumber}" required="true" />
+                                        required="true" />
 
                                     <Label id="lblCustomerName" text="Customer Name" />
-                                    <Input id="customerNameInput" placeholder="e.g. John Doe" 
-                                        value="{localModel>/customerName}" />
+                                    <Input id="customerNameInput" placeholder="e.g. John Doe" />
 
                                     <Label id="lblOrderAmount" text="Order Amount" />
                                     <Input id="orderAmountInput" placeholder="e.g. 1500.00" 
-                                        value="{localModel>/orderAmount}" type="Number" />
+                                        type="Number" />
 
                                     <Label id="lblOrderDate" text="Order Date" />
                                     <DatePicker id="orderDatePicker" 
-                                        value="{localModel>/orderDate}"
                                         displayFormat="yyyy-MM-dd"
                                         valueFormat="yyyy-MM-dd" />
 
                                     <Label id="lblExpectedDelivery" text="Expected Delivery Date" />
                                     <DatePicker id="expectedDeliveryPicker" 
-                                        value="{localModel>/expectedDeliveryDate}"
                                         displayFormat="yyyy-MM-dd"
                                         valueFormat="yyyy-MM-dd" />
 
                                     <Label id="lblShippingCountry" text="Shipping Country" />
-                                    <Input id="shippingCountryInput" placeholder="e.g. USA" 
-                                        value="{localModel>/shippingCountry}" />
+                                    <Input id="shippingCountryInput" placeholder="e.g. USA" />
                                 </f:content>
                             </f:SimpleForm>
 

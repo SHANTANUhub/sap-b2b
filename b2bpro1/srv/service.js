@@ -45,26 +45,42 @@ module.exports = class CatalogService extends cds.ApplicationService {
 
       console.log('Workflow Payload:', JSON.stringify(oPayload, null, 2));
 
-      try {
-        const response = await executeHttpRequest(
-          { destinationName: 'spa_process_destination' },
-          {
-            method: 'POST',
-            url: '/v1/workflow-instances',
-            data: oPayload,
-            headers: { 'Content-Type': 'application/json' },
-            fetchCsrfToken: false
-          }
-        );
+      // Check if running in production mode
+      const isProduction = process.env.NODE_ENV === 'production';
 
-        console.log('Workflow triggered successfully:', JSON.stringify(response.data, null, 2));
+      if (isProduction) {
+        // Production: Call actual BPA workflow
+        try {
+          const response = await executeHttpRequest(
+            { destinationName: 'spa_process_destination' },
+            {
+              method: 'POST',
+              url: '/v1/workflow-instances',
+              data: oPayload,
+              headers: { 'Content-Type': 'application/json' },
+              fetchCsrfToken: false
+            }
+          );
+
+          console.log('Workflow triggered successfully:', JSON.stringify(response.data, null, 2));
+          return { 
+            workflowInstanceId: response.data.id,
+            status: 'Workflow triggered successfully'
+          };
+        } catch (error) {
+          console.error('Error triggering workflow:', error.response?.data || error.message);
+          return req.error(500, `Failed to trigger workflow: ${error.message}`);
+        }
+      } else {
+        // Local development: Return mock response
+        const mockInstanceId = `WF-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+        console.log('Local Mode: Returning mock workflow instance:', mockInstanceId);
+        console.log('In production, this would trigger BPA workflow with payload above');
+        
         return { 
-          workflowInstanceId: response.data.id,
-          status: 'Workflow triggered successfully'
+          workflowInstanceId: mockInstanceId,
+          status: 'Workflow triggered successfully (local mode)'
         };
-      } catch (error) {
-        console.error('Error triggering workflow:', error.response?.data || error.message);
-        return req.error(500, `Failed to trigger workflow: ${error.message}`);
       }
     });
 
